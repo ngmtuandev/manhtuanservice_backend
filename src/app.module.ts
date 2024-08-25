@@ -13,6 +13,7 @@ import { LoggerModule } from './common/logger';
 import { ScheduleModule } from '@nestjs/schedule';
 import { ScheduledTasksService } from './domain/user/schedule.task.service';
 import { SessionCodeRepository } from './database/repository';
+import { ServiceModule } from './domain/service/service.module';
 
 // TODO: FIX .ENV
 @Module({
@@ -22,6 +23,7 @@ import { SessionCodeRepository } from './database/repository';
     DatabaseModule,
     RedisModule,
     UserModule,
+    ServiceModule,
     AuthModule,
     ScheduleModule.forRoot(),
   ],

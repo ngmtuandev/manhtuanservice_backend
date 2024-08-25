@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import {
+  ServiceEntity,
   SessionCodeEntity,
   UserEntity,
 } from './entity';
@@ -18,6 +19,7 @@ import {
       entities: [
         UserEntity,
         SessionCodeEntity,
+        ServiceEntity
       ],
       synchronize: true,
     }),

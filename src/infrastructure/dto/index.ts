@@ -9,3 +9,7 @@ export * from './user/update-user.dto';
 export * from './session-code/create-session-code.dto';
 export * from './session-code/find-session-code.dto';
 
+// SERVICE
+export * from './service/create-service.dto';
+export * from './service/service.dto';
+export * from './service/update-service.dto';
