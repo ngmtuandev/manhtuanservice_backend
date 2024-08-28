@@ -3,6 +3,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import {
   AuthModule,
+  BrandModule,
+  DiscountModule,
+  ServiceModule,
   UserModule,
 } from './domain';
 import { DatabaseModule, RedisModule } from './database';
@@ -13,8 +16,6 @@ import { LoggerModule } from './common/logger';
 import { ScheduleModule } from '@nestjs/schedule';
 import { ScheduledTasksService } from './domain/user/schedule.task.service';
 import { SessionCodeRepository } from './database/repository';
-import { ServiceModule } from './domain/service/service.module';
-import { BrandModule } from './domain/brand/brand.module';
 
 // TODO: FIX .ENV
 @Module({
@@ -27,6 +28,7 @@ import { BrandModule } from './domain/brand/brand.module';
     ServiceModule,
     AuthModule,
     BrandModule,
+    DiscountModule,
     ScheduleModule.forRoot(),
   ],
   controllers: [AppController],

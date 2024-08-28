@@ -1,8 +1,10 @@
 import {
     Entity,
     Column,
+    OneToMany,
 } from 'typeorm';
 import { GenericEntity } from './generic.entity';
+import { ProductEntity } from './product.entity';
 
 @Entity()
 export class ServiceEntity extends GenericEntity {
@@ -11,5 +13,8 @@ export class ServiceEntity extends GenericEntity {
 
     @Column({ name: 'url' })
     url: string;
+
+    @OneToMany(() => ProductEntity, (product) => product.service)
+    products: ProductEntity[];
 
 }

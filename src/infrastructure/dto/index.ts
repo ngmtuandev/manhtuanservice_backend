@@ -17,3 +17,7 @@ export * from './service/update-service.dto';
 // BRAND
 export * from './brand/brand.dto';
 export * from './brand/create-brand.dto';
+
+// DISCOUNT
+export * from './discount/create-discount.dto';
+export * from './discount/discount.dto';

@@ -2,10 +2,12 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import {
   BrandEntity,
+  DiscountEntity,
   ServiceEntity,
   SessionCodeEntity,
   UserEntity,
 } from './entity';
+import { ProductEntity } from './entity/product.entity';
 
 // TODO: FIX .ENV
 @Module({
@@ -21,7 +23,9 @@ import {
         UserEntity,
         SessionCodeEntity,
         ServiceEntity,
-        BrandEntity
+        BrandEntity,
+        ProductEntity,
+        DiscountEntity
       ],
       synchronize: true,
     }),
