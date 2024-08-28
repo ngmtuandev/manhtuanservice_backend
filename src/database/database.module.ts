@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import {
+  BrandEntity,
   ServiceEntity,
   SessionCodeEntity,
   UserEntity,
@@ -19,7 +20,8 @@ import {
       entities: [
         UserEntity,
         SessionCodeEntity,
-        ServiceEntity
+        ServiceEntity,
+        BrandEntity
       ],
       synchronize: true,
     }),

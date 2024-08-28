@@ -13,3 +13,7 @@ export * from './session-code/find-session-code.dto';
 export * from './service/create-service.dto';
 export * from './service/service.dto';
 export * from './service/update-service.dto';
+
+// BRAND
+export * from './brand/brand.dto';
+export * from './brand/create-brand.dto';

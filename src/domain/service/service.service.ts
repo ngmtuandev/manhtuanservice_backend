@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
+import { plainToInstance } from 'class-transformer';
 import { IdDto } from 'src/common/dto';
 import { ServiceRepository } from 'src/database/repository';
-import { CreateServiceDto, LoginUserDto } from 'src/infrastructure/dto';
+import { CreateServiceDto, LoginUserDto, ServiceDto } from 'src/infrastructure/dto';
 
 @Injectable()
 export class ServiceService {
@@ -14,9 +15,9 @@ export class ServiceService {
         return result;
     }
 
-    async findAll() {
+    async findAll(): Promise<ServiceDto[]> {
         const result = await this.serviceRepository.findAll();
-        return result;
+        return plainToInstance(ServiceDto, result);
     }
 
     async delete(id: IdDto) {

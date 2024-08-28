@@ -14,6 +14,7 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { ScheduledTasksService } from './domain/user/schedule.task.service';
 import { SessionCodeRepository } from './database/repository';
 import { ServiceModule } from './domain/service/service.module';
+import { BrandModule } from './domain/brand/brand.module';
 
 // TODO: FIX .ENV
 @Module({
@@ -25,6 +26,7 @@ import { ServiceModule } from './domain/service/service.module';
     UserModule,
     ServiceModule,
     AuthModule,
+    BrandModule,
     ScheduleModule.forRoot(),
   ],
   controllers: [AppController],
