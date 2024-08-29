@@ -1,11 +1,11 @@
-import { Injectable } from '@nestjs/common';
-import { plainToClass } from 'class-transformer';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { plainToClass, plainToInstance } from 'class-transformer';
 import { messageApi } from 'src/common/constant';
 import { DiscountEntity, ProductEntity, ProductVarientEntity } from 'src/database/entity';
 import { BrandRepository, DiscountRepository, ServiceRepository } from 'src/database/repository';
 import { ProductVarientRepository } from 'src/database/repository/product-varient.repository';
 import { ProductRepository } from 'src/database/repository/product.repository';
-import { CreateProductRequestDto } from 'src/infrastructure/dto';
+import { CreateProductRequestDto, FindOneProductDto, ResponseProductDto } from 'src/infrastructure/dto';
 import { Connection } from 'typeorm';
 
 @Injectable()
@@ -20,6 +20,7 @@ export class ProductService {
     ) { }
 
     async create(productInfo: CreateProductRequestDto) {
+
         const { brandId, description, discountId, info, name, productVarients, serviceId } = productInfo;
 
         const queryRunner = this.connection.createQueryRunner();
@@ -61,5 +62,22 @@ export class ProductService {
         } finally {
             await queryRunner.release();
         }
+    }
+
+    async findOne(findInfo: FindOneProductDto) {
+        const product = await this.productRepository.findOne(findInfo.productId);
+        if (!product) throw new NotFoundException(`Product with id ${findInfo.productId} not found`);
+
+        let varientInfo;
+        if (findInfo.variantId) {
+            varientInfo = await this.productVarientRepository.findOne(product, findInfo.variantId);
+            if (!varientInfo) throw new NotFoundException(`Varient with id ${findInfo.variantId} not found for product ${findInfo.productId}`);
+        }
+        else {
+            varientInfo = product.productVarient[0];
+        }
+
+        const result = plainToInstance(ResponseProductDto, { ...product, varient: varientInfo })
+        return result;
     }
 }

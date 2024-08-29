@@ -1,9 +1,9 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { ROLE_CODE, STATUS_CODE } from 'src/infrastructure/enum';
 import { messageApi, Response } from 'src/common/constant';
-import { Roles } from 'src/common/decorators';
+import { PublicAuth, Roles } from 'src/common/decorators';
 import { ProductService } from './product.service';
-import { CreateProductDto, CreateProductRequestDto } from 'src/infrastructure/dto';
+import { CreateProductDto, CreateProductRequestDto, FindOneProductDto } from 'src/infrastructure/dto';
 
 @Controller('product')
 export class ProductController {
@@ -22,7 +22,30 @@ export class ProductController {
                 true,
             );
         } catch (error) {
-            console.log('error : ', error)
+            return new Response(
+                STATUS_CODE.FAILURE,
+                null,
+                messageApi.FAIL,
+                undefined,
+                false,
+            );
+        }
+    }
+
+    @PublicAuth()
+    @Get()
+    async findOne(@Query() productInfo: FindOneProductDto) {
+        try {
+            const result = await this.productService.findOne(productInfo);
+            return new Response(
+                STATUS_CODE.SUCCESS,
+                undefined,
+                result,
+                undefined,
+                true,
+            );
+        } catch (error) {
+            // console.log('error : ', error)
             return new Response(
                 STATUS_CODE.FAILURE,
                 null,

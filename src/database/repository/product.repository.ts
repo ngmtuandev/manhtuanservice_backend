@@ -18,4 +18,15 @@ export class ProductRepository extends GenericRepository<ProductEntity> {
         return result;
     }
 
+    async findOne(productId: number) {
+        const product = await this.repository.findOne({
+            where: { id: productId },
+            relations: ['brand', 'service', 'productVarient', 'discounts'],
+
+        })
+
+        if (product) return product;
+        return undefined;
+    }
+
 }
