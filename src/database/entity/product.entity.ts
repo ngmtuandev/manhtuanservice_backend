@@ -10,6 +10,7 @@ import { GenericEntity } from './generic.entity';
 import { BrandEntity } from './brand.entity';
 import { ServiceEntity } from './service.entity';
 import { DiscountEntity } from './discount.entity';
+import { ProductVarientEntity } from './product-varient.entity';
 
 @Entity()
 export class ProductEntity extends GenericEntity {
@@ -31,5 +32,9 @@ export class ProductEntity extends GenericEntity {
 
     @OneToMany(() => DiscountEntity, (discount) => discount.product, { cascade: true })
     discounts: DiscountEntity[];
+
+    @OneToMany(() => ProductVarientEntity, (productVarient) => productVarient.product)
+    productVarient: ProductVarientEntity[];
+
 
 }

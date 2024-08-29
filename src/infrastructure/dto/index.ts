@@ -21,3 +21,9 @@ export * from './brand/create-brand.dto';
 // DISCOUNT
 export * from './discount/create-discount.dto';
 export * from './discount/discount.dto';
+
+// PRODUCT
+export * from './product/create-product.dto';
+
+// PRODUCT VARIENT
+export * from './product-varient/create-product-varient.dto';

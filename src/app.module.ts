@@ -5,6 +5,7 @@ import {
   AuthModule,
   BrandModule,
   DiscountModule,
+  ProductModule,
   ServiceModule,
   UserModule,
 } from './domain';
@@ -29,6 +30,7 @@ import { SessionCodeRepository } from './database/repository';
     AuthModule,
     BrandModule,
     DiscountModule,
+    ProductModule,
     ScheduleModule.forRoot(),
   ],
   controllers: [AppController],
