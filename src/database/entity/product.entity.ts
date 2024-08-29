@@ -1,8 +1,6 @@
 import {
     Entity,
     Column,
-    OneToOne,
-    JoinColumn,
     ManyToOne,
     OneToMany,
 } from 'typeorm';
@@ -23,15 +21,14 @@ export class ProductEntity extends GenericEntity {
     @Column({ name: 'description' })
     description: string;
 
-    @OneToOne(() => BrandEntity)
-    @JoinColumn()
+    @ManyToOne(() => BrandEntity, (brand) => brand.product)
     brand: BrandEntity;
 
     @ManyToOne(() => ServiceEntity, (service) => service.products)
     service: ServiceEntity;
 
     @OneToMany(() => DiscountEntity, (discount) => discount.product, { cascade: true })
-    discounts: DiscountEntity[];
+    discounts: DiscountEntity;
 
     @OneToMany(() => ProductVarientEntity, (productVarient) => productVarient.product)
     productVarient: ProductVarientEntity[];

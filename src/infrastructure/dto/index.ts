@@ -24,6 +24,7 @@ export * from './discount/discount.dto';
 
 // PRODUCT
 export * from './product/create-product.dto';
+export * from './product/create-product-request.dto';
 
 // PRODUCT VARIENT
 export * from './product-varient/create-product-varient.dto';

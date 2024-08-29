@@ -12,7 +12,7 @@ export class ProductVarientEntity extends GenericEntity {
     name: string;
 
     @Column({ name: 'price' })
-    price: string;
+    price: number;
 
     @Column({ name: 'storage' })
     storage: number;

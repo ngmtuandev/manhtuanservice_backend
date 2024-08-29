@@ -1,8 +1,9 @@
-import { Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { ROLE_CODE, STATUS_CODE } from 'src/infrastructure/enum';
 import { messageApi, Response } from 'src/common/constant';
 import { Roles } from 'src/common/decorators';
 import { ProductService } from './product.service';
+import { CreateProductDto, CreateProductRequestDto } from 'src/infrastructure/dto';
 
 @Controller('product')
 export class ProductController {
@@ -10,17 +11,18 @@ export class ProductController {
 
     @Roles(ROLE_CODE.Admin)
     @Post()
-    async create() {
+    async create(@Body() productInfo: CreateProductRequestDto) {
         try {
-
-            // return new Response(
-            //     STATUS_CODE.SUCCESS,
-            //     undefined,
-            //     brandNew,
-            //     undefined,
-            //     true,
-            // );
+            const result = await this.productService.create(productInfo);
+            return new Response(
+                STATUS_CODE.SUCCESS,
+                undefined,
+                result,
+                undefined,
+                true,
+            );
         } catch (error) {
+            console.log('error : ', error)
             return new Response(
                 STATUS_CODE.FAILURE,
                 null,

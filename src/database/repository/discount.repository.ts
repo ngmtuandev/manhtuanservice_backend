@@ -39,4 +39,9 @@ export class DiscountRepository extends GenericRepository<DiscountEntity> {
         return result;
     }
 
+    async findById(id: number) {
+        const result = await this.repository.findOneBy({ id });
+        return result;
+    }
+
 }

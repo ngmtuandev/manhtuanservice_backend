@@ -1,6 +1,6 @@
 import { Expose } from 'class-transformer';
 import { IsNotEmpty, IsNumber, IsUUID } from 'class-validator';
-import { ProductVarientEntity } from 'src/database/entity';
+import { BrandEntity, DiscountEntity, ProductVarientEntity, ServiceEntity } from 'src/database/entity';
 
 export class ProductDto {
     @Expose({ name: 'name' })
@@ -18,20 +18,19 @@ export class ProductDto {
     @Expose({ name: 'brandId' })
     @IsNotEmpty()
     @IsNumber()
-    brandId: number;
+    brand: BrandEntity;
 
     @Expose({ name: 'serviceId' })
     @IsNotEmpty()
     @IsNumber()
-    serviceId: number;
+    service: ServiceEntity;
 
     @Expose({ name: 'discountId' })
     @IsNotEmpty()
     @IsNumber()
-    discountId: number;
+    discount: DiscountEntity;
 
     @Expose({ name: 'productVarient' })
-    @IsNotEmpty()
     @IsNumber()
     productVarient: ProductVarientEntity[];
 

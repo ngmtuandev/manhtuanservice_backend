@@ -43,4 +43,9 @@ export class ServiceRepository extends GenericRepository<ServiceEntity> {
         return false;
     }
 
+    async findById(id: number) {
+        const result = await this.repository.findOneBy({ id });
+        return result;
+    }
+
 }

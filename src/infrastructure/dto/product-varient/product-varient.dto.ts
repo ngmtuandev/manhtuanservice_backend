@@ -1,5 +1,6 @@
 import { Expose } from 'class-transformer';
 import { IsNotEmpty } from 'class-validator';
+import { ProductEntity } from 'src/database/entity';
 
 export class ProductVarientDto {
     @Expose({ name: 'name' })
@@ -18,5 +19,8 @@ export class ProductVarientDto {
     @IsNotEmpty()
     storage: number;
 
+    @Expose({ name: 'product' })
+    @IsNotEmpty()
+    product: ProductEntity;
 
 }
