@@ -78,4 +78,28 @@ export class ProductController {
             );
         }
     }
+
+    @PublicAuth()
+    @Get('filter')
+    async filter(@Query() queryParams: any) {
+        try {
+            const result = await this.productService.filter(queryParams);
+            return new Response(
+                STATUS_CODE.SUCCESS,
+                undefined,
+                result,
+                undefined,
+                true,
+            );
+        } catch (error) {
+            // console.log('error: ', error)
+            return new Response(
+                STATUS_CODE.FAILURE,
+                null,
+                messageApi.FAIL,
+                undefined,
+                false,
+            );
+        }
+    }
 }

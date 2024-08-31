@@ -6,7 +6,7 @@ import { BrandRepository, DiscountRepository, ServiceRepository } from 'src/data
 import { ProductVarientRepository } from 'src/database/repository/product-varient.repository';
 import { ProductRepository } from 'src/database/repository/product.repository';
 import { CreateProductRequestDto, FindOneProductDto, PaginationInfinityDto, ResponseFindAllDto, ResponseProductDto } from 'src/infrastructure/dto';
-import { Connection } from 'typeorm';
+import { Connection, EntityManager } from 'typeorm';
 
 @Injectable()
 export class ProductService {
@@ -17,6 +17,7 @@ export class ProductService {
         private readonly discountRepository: DiscountRepository,
         private readonly serviceRepository: ServiceRepository,
         private readonly connection: Connection,
+        private readonly entityManager: EntityManager,
     ) { }
 
     async create(productInfo: CreateProductRequestDto) {
@@ -94,5 +95,40 @@ export class ProductService {
 
     }
 
-    async
+    async filter(queryParams: any) {
+        const { name, priceMin, priceMax, storage, serviceId } = queryParams;
+
+        const queryBuilder = this.entityManager
+            .createQueryBuilder('product_entity', 'a')
+            .select([
+                'a.name',
+                'a.id',
+                'a.description',
+                'pv.color',
+                'pv.storage',
+                'pv.price',
+                'pv.name',
+                's.service_name'
+            ])
+            .leftJoin('a.productVarient', 'pv')
+            .leftJoin('a.service', 's');
+
+        if (name) {
+            queryBuilder.andWhere('pv.name LIKE :name', { name: `%${name}%` });
+        }
+
+        if (priceMin !== undefined && priceMax !== undefined) {
+            queryBuilder.andWhere('pv.price BETWEEN :priceMin AND :priceMax', { priceMin, priceMax });
+        }
+
+        if (storage !== undefined) {
+            queryBuilder.andWhere('pv.storage = :storage', { storage });
+        }
+
+        if (serviceId !== undefined) {
+            queryBuilder.andWhere('s.id = :serviceId', { serviceId });
+        }
+
+        return await queryBuilder.getMany();
+    }
 }
