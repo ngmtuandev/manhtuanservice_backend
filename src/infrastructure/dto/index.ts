@@ -27,6 +27,10 @@ export * from './product/create-product.dto';
 export * from './product/create-product-request.dto';
 export * from './product/find-one-product.dto';
 export * from './product/response-item-product.dto';
+export * from './product/response-find-all.dto';
 
 // PRODUCT VARIENT
 export * from './product-varient/create-product-varient.dto';
+
+// PAGINATION 
+export * from './pagination/pagination-infinity.dto';

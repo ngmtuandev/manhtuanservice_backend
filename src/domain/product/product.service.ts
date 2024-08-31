@@ -5,7 +5,7 @@ import { DiscountEntity, ProductEntity, ProductVarientEntity } from 'src/databas
 import { BrandRepository, DiscountRepository, ServiceRepository } from 'src/database/repository';
 import { ProductVarientRepository } from 'src/database/repository/product-varient.repository';
 import { ProductRepository } from 'src/database/repository/product.repository';
-import { CreateProductRequestDto, FindOneProductDto, ResponseProductDto } from 'src/infrastructure/dto';
+import { CreateProductRequestDto, FindOneProductDto, PaginationInfinityDto, ResponseFindAllDto, ResponseProductDto } from 'src/infrastructure/dto';
 import { Connection } from 'typeorm';
 
 @Injectable()
@@ -80,4 +80,19 @@ export class ProductService {
         const result = plainToInstance(ResponseProductDto, { ...product, varient: varientInfo })
         return result;
     }
+
+    async findAll(paginationInfo: PaginationInfinityDto) {
+
+        const { products } = await this.productRepository.findAll(paginationInfo);
+        const hasNextPage = products.length > paginationInfo.limit;
+        const paginatedProducts = hasNextPage ? products.slice(0, paginationInfo.limit) : products;
+        const newNextPageToken = hasNextPage ? +paginationInfo.nextPageToken + +paginationInfo.limit : null;
+
+        const result = plainToInstance(ResponseFindAllDto, { results: paginatedProducts, hasNextPage, nextPageToken: newNextPageToken })
+
+        return result;
+
+    }
+
+    async
 }
