@@ -26,10 +26,6 @@ export class UserController {
   constructor(private readonly userService: UserService) { }
 
   @PublicAuth()
-  @ApiOperation({
-    summary: 'Api register new users',
-  })
-  @ApiBadRequestResponse({ description: 'Register failure' })
   @Post('register')
   async register(@Body() userInfo: CreateUserDto) {
     try {
@@ -53,10 +49,6 @@ export class UserController {
   }
 
   @PublicAuth()
-  @ApiOperation({
-    summary: 'Api confirm email when register new users',
-  })
-  @ApiBadRequestResponse({ description: 'Confirm Register failure' })
   @Post('confirm')
   async confirm(@Body('code') code: any) {
     try {
@@ -88,10 +80,6 @@ export class UserController {
     }
   }
 
-  @ApiOperation({
-    summary: 'Api info users current',
-  })
-  @ApiBadRequestResponse({ description: 'Get User failure' })
   @Get('info-current')
   async findInfoCurrent(@Request() req: Request) {
     try {
@@ -123,10 +111,6 @@ export class UserController {
     }
   }
 
-  @ApiOperation({
-    summary: 'Api confirm email when register new users',
-  })
-  @ApiBadRequestResponse({ description: 'Confirm Register failure' })
   @Patch('update-password')
   async updatePassword(@Body() updateInfo: UpdatePasswordDto) {
     try {
@@ -159,10 +143,6 @@ export class UserController {
   }
 
   @PublicAuth()
-  @ApiOperation({
-    summary: 'Api get list user',
-  })
-  @ApiBadRequestResponse({ description: 'Get list user failure' })
   @Get('get-detail')
   async getDetail(@Body() id: IdDto) {
     try {
@@ -186,10 +166,6 @@ export class UserController {
   }
 
   @Roles(ROLE_CODE.Admin)
-  @ApiOperation({
-    summary: 'Delete one user by id',
-  })
-  @ApiBadRequestResponse({ description: 'Delete user failure' })
   @Delete()
   async delete(@Body() id: IdDto) {
     try {
@@ -213,10 +189,6 @@ export class UserController {
   }
 
   @Roles(ROLE_CODE.Admin)
-  @ApiOperation({
-    summary: 'Find all user',
-  })
-  @ApiBadRequestResponse({ description: 'Find All user failure' })
   @Get('find-all')
   async findAll() {
     try {
@@ -239,10 +211,6 @@ export class UserController {
     }
   }
 
-  @ApiOperation({
-    summary: 'Update one user by id',
-  })
-  @ApiBadRequestResponse({ description: 'Update user failure' })
   @Put()
   async update(@Body() updateUserDto: UpdateUserDto) {
     try {

@@ -1,9 +1,14 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import {
+  BrandEntity,
+  DiscountEntity,
+  ProductVarientEntity,
+  ServiceEntity,
   SessionCodeEntity,
   UserEntity,
 } from './entity';
+import { ProductEntity } from './entity/product.entity';
 
 // TODO: FIX .ENV
 @Module({
@@ -18,6 +23,11 @@ import {
       entities: [
         UserEntity,
         SessionCodeEntity,
+        ServiceEntity,
+        BrandEntity,
+        ProductEntity,
+        DiscountEntity,
+        ProductVarientEntity
       ],
       synchronize: true,
     }),

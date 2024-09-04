@@ -5,7 +5,9 @@ import { SessionCodeRepository } from 'src/database/repository';
 @Injectable()
 export class ScheduledTasksService {
   private readonly logger = new Logger(ScheduledTasksService.name);
-  constructor(private readonly sessionCodeRepository: SessionCodeRepository) {}
+  constructor(
+    private readonly sessionCodeRepository: SessionCodeRepository,
+  ) { }
 
   @Cron('1 * * * * *')
   async handleCron() {

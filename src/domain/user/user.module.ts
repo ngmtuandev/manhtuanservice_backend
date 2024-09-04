@@ -20,4 +20,4 @@ import { ScheduledTasksService } from './schedule.task.service';
   ],
   exports: [ScheduledTasksService]
 })
-export class UserModule {}
+export class UserModule { }

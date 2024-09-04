@@ -3,6 +3,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import {
   AuthModule,
+  BrandModule,
+  DiscountModule,
+  ProductModule,
+  ServiceModule,
   UserModule,
 } from './domain';
 import { DatabaseModule, RedisModule } from './database';
@@ -22,7 +26,11 @@ import { SessionCodeRepository } from './database/repository';
     DatabaseModule,
     RedisModule,
     UserModule,
+    ServiceModule,
     AuthModule,
+    BrandModule,
+    DiscountModule,
+    ProductModule,
     ScheduleModule.forRoot(),
   ],
   controllers: [AppController],
