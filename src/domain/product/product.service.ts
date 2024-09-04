@@ -22,7 +22,7 @@ export class ProductService {
 
     async create(productInfo: CreateProductRequestDto) {
 
-        const { brandId, description, discountId, info, name, productVarients, serviceId, thumbnail } = productInfo;
+        const { brandId, description, discountId, info, name, productVarients, serviceId } = productInfo;
 
         const queryRunner = this.connection.createQueryRunner();
         await queryRunner.connect();
@@ -40,14 +40,14 @@ export class ProductService {
                 throw new Error(messageApi.CREATE_PRODUCT_FAIL_FIELD);
             }
 
-            const newProduct = plainToClass(ProductEntity, { name, info, description, brand, service, discount, thumbnail });
+            const newProduct = plainToClass(ProductEntity, { name, info, description, brand, service, discount });
 
             const savedProduct = await queryRunner.manager.save(ProductEntity, newProduct);
 
-            if (savedProduct && productVarients) {
-                const productVarientEntities = productVarients?.map(varientDto => {
+            if (savedProduct) {
+                const productVarientEntities = productVarients.map(varientDto => {
 
-                    const varient = plainToClass(ProductVarientEntity, { ...varientDto, product: newProduct });
+                    const varient = plainToClass(ProductVarientEntity, varientDto);
                     // throw error; test transaction
                     return varient;
                 });
@@ -66,7 +66,7 @@ export class ProductService {
     }
 
     async findOne(findInfo: FindOneProductDto) {
-        const product = await this.productRepository?.findOne(findInfo.productId);
+        const product = await this.productRepository.findOne(findInfo.productId);
         if (!product) throw new NotFoundException(`Product with id ${findInfo.productId} not found`);
 
         let varientInfo;
@@ -97,6 +97,7 @@ export class ProductService {
 
     async filter(queryParams: any) {
         const { name, priceMin, priceMax, storage, brandId } = queryParams;
+
         const queryBuilder = this.entityManager
             .createQueryBuilder('product_entity', 'a')
             .select([
