@@ -5,3 +5,4 @@ export * from './brand/brand.module';
 export * from './service/service.module';
 export * from './discount/discount.module';
 export * from './product/product.module';
+export * from './varient/varient.module';

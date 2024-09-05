@@ -22,7 +22,7 @@ export class ProductService {
 
     async create(productInfo: CreateProductRequestDto) {
 
-        const { brandId, description, discountId, info, name, productVarients, serviceId } = productInfo;
+        const { brandId, description, discountId, info, name, productVarients, serviceId, thumbnail } = productInfo;
 
         const queryRunner = this.connection.createQueryRunner();
         await queryRunner.connect();
@@ -40,14 +40,14 @@ export class ProductService {
                 throw new Error(messageApi.CREATE_PRODUCT_FAIL_FIELD);
             }
 
-            const newProduct = plainToClass(ProductEntity, { name, info, description, brand, service, discount });
+            const newProduct = plainToClass(ProductEntity, { name, info, description, brand, service, discount, thumbnail });
 
             const savedProduct = await queryRunner.manager.save(ProductEntity, newProduct);
 
             if (savedProduct) {
                 const productVarientEntities = productVarients.map(varientDto => {
 
-                    const varient = plainToClass(ProductVarientEntity, varientDto);
+                    const varient = plainToClass(ProductVarientEntity, { ...varientDto, product: newProduct });
                     // throw error; test transaction
                     return varient;
                 });
@@ -71,8 +71,8 @@ export class ProductService {
 
         let varientInfo;
         if (findInfo.variantId) {
-            varientInfo = await this.productVarientRepository.findOne(product, findInfo.variantId);
-            if (!varientInfo) throw new NotFoundException(`Varient with id ${findInfo.variantId} not found for product ${findInfo.productId}`);
+            varientInfo = await this.productVarientRepository.findOne(findInfo.variantId);
+            if (!varientInfo) throw new NotFoundException(`Varient with id ${findInfo.variantId} not found for product`);
         }
         else {
             varientInfo = product.productVarient[0];

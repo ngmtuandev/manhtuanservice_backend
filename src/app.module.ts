@@ -8,6 +8,7 @@ import {
   ProductModule,
   ServiceModule,
   UserModule,
+  VarientModule,
 } from './domain';
 import { DatabaseModule, RedisModule } from './database';
 import { ConfigModule } from '@nestjs/config';
@@ -31,6 +32,7 @@ import { SessionCodeRepository } from './database/repository';
     BrandModule,
     DiscountModule,
     ProductModule,
+    VarientModule,
     ScheduleModule.forRoot(),
   ],
   controllers: [AppController],

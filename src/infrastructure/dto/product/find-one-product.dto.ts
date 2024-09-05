@@ -1,9 +1,9 @@
 import { Expose } from 'class-transformer';
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsOptional } from 'class-validator';
 
 export class FindOneProductDto {
     @Expose({ name: 'productId' })
-    @IsNotEmpty()
+    @IsOptional()
     productId: number;
 
     @Expose({ name: 'variantId' })

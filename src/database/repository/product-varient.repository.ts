@@ -17,10 +17,15 @@ export class ProductVarientRepository extends GenericRepository<ProductVarientEn
         return result;
     }
 
-    async findOne(product: any, variantId: number) {
+    async findOne(variantId: number) {
         const varientOfProduct = await this.repository.findOne({ where: { id: variantId } });
-        // console.log('varientOfProduct: ', varientOfProduct)
         return varientOfProduct;
+    }
+
+    async findAll(productId: any) {
+
+        const result = await this.repository.find({ where: { product: { id: productId } }, select: ["name", "price", "color", "storage", "id"] });
+        return result;
     }
 
 }
