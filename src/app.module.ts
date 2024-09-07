@@ -18,6 +18,7 @@ import { LoggerModule } from './common/logger';
 import { ScheduleModule } from '@nestjs/schedule';
 import { ScheduledTasksService } from './domain/user/schedule.task.service';
 import { SessionCodeRepository } from './database/repository';
+import { CommentModule } from './domain/comment/comment.module';
 
 // TODO: FIX .ENV
 @Module({
@@ -33,6 +34,7 @@ import { SessionCodeRepository } from './database/repository';
     DiscountModule,
     ProductModule,
     VarientModule,
+    CommentModule,
     ScheduleModule.forRoot(),
   ],
   controllers: [AppController],

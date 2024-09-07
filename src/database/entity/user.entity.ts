@@ -1,9 +1,11 @@
 import {
   Entity,
   Column,
+  OneToMany,
 } from 'typeorm';
 import { GenericEntity } from './generic.entity';
 import { ROLE_CODE } from 'src/infrastructure/enum';
+import { CommentEntity } from './comment.entity';
 
 @Entity()
 export class UserEntity extends GenericEntity {
@@ -24,5 +26,8 @@ export class UserEntity extends GenericEntity {
 
   @Column()
   password: string;
+
+  @OneToMany(() => CommentEntity, (comment) => comment.user)
+  comment: CommentEntity;
 
 }

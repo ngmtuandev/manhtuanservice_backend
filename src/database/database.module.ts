@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import {
   BrandEntity,
+  CommentEntity,
   DiscountEntity,
   ProductVarientEntity,
   ServiceEntity,
@@ -27,7 +28,8 @@ import { ProductEntity } from './entity/product.entity';
         BrandEntity,
         ProductEntity,
         DiscountEntity,
-        ProductVarientEntity
+        ProductVarientEntity,
+        CommentEntity
       ],
       synchronize: true,
     }),

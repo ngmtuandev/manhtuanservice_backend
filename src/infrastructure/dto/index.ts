@@ -34,3 +34,10 @@ export * from './product-varient/create-product-varient.dto';
 
 // PAGINATION 
 export * from './pagination/pagination-infinity.dto';
+
+// COMMENT
+export * from './comment/comment.dto';
+export * from './comment/create-comment.dto';
+export * from './comment/find-comment.dto';
+export * from './comment/update-comment.dto';
+

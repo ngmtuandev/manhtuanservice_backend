@@ -9,6 +9,7 @@ import { BrandEntity } from './brand.entity';
 import { ServiceEntity } from './service.entity';
 import { DiscountEntity } from './discount.entity';
 import { ProductVarientEntity } from './product-varient.entity';
+import { CommentEntity } from './comment.entity';
 
 @Entity()
 export class ProductEntity extends GenericEntity {
@@ -36,5 +37,7 @@ export class ProductEntity extends GenericEntity {
     @OneToMany(() => ProductVarientEntity, (productVarient) => productVarient.product)
     productVarient: ProductVarientEntity[];
 
+    @OneToMany(() => CommentEntity, (comment) => comment.product)
+    comment: CommentEntity;
 
 }
