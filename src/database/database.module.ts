@@ -4,6 +4,7 @@ import {
   BrandEntity,
   CommentEntity,
   DiscountEntity,
+  NewsEntity,
   ProductVarientEntity,
   ServiceEntity,
   SessionCodeEntity,
@@ -29,6 +30,7 @@ import { ProductEntity } from './entity/product.entity';
         ProductEntity,
         DiscountEntity,
         ProductVarientEntity,
+        NewsEntity,
         CommentEntity
       ],
       synchronize: true,

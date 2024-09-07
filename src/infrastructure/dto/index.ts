@@ -41,3 +41,9 @@ export * from './comment/create-comment.dto';
 export * from './comment/find-comment.dto';
 export * from './comment/update-comment.dto';
 
+// NEWS
+export * from './news/create-news.dto';
+export * from './news/news.dto';
+export * from './news/find-news.dto';
+
+
