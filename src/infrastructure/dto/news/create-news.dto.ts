@@ -1,10 +1,10 @@
 import { Expose } from 'class-transformer';
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsOptional } from 'class-validator';
 
 export class CreateNewsDto {
 
     @Expose({ name: 'view' })
-    @IsNotEmpty()
+    @IsOptional()
     view: number;
 
     @Expose({ name: 'title' })
@@ -20,5 +20,6 @@ export class CreateNewsDto {
     content: string;
 
     @Expose({ name: 'like' })
+    @IsOptional()
     like: number;
 }

@@ -31,6 +31,7 @@ export class NewsRepository extends GenericRepository<NewsEntity> {
 
         let result = undefined;
         const findNew = await this.repository.findOne({ where: { id: newsId } });
+        await this.repository.update({ id: newsId }, { view: +findNew.view + 1 })
         if (findNew) {
             result = findNew;
         }
