@@ -2,10 +2,12 @@ import {
   Entity,
   Column,
   OneToMany,
+  OneToOne,
 } from 'typeorm';
 import { GenericEntity } from './generic.entity';
 import { ROLE_CODE } from 'src/infrastructure/enum';
 import { CommentEntity } from './comment.entity';
+import { CartEntity } from './cart.entity';
 
 @Entity()
 export class UserEntity extends GenericEntity {
@@ -29,5 +31,8 @@ export class UserEntity extends GenericEntity {
 
   @OneToMany(() => CommentEntity, (comment) => comment.user)
   comment: CommentEntity;
+
+  @OneToOne(() => CartEntity, (cart) => cart.user)
+  cart: CartEntity;
 
 }

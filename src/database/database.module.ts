@@ -2,15 +2,17 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import {
   BrandEntity,
+  CartEntity,
+  CartItemEntity,
   CommentEntity,
   DiscountEntity,
   NewsEntity,
+  ProductEntity,
   ProductVarientEntity,
   ServiceEntity,
   SessionCodeEntity,
   UserEntity,
 } from './entity';
-import { ProductEntity } from './entity/product.entity';
 
 // TODO: FIX .ENV
 @Module({
@@ -31,7 +33,9 @@ import { ProductEntity } from './entity/product.entity';
         DiscountEntity,
         ProductVarientEntity,
         NewsEntity,
-        CommentEntity
+        CommentEntity,
+        CartEntity,
+        CartItemEntity
       ],
       synchronize: true,
     }),

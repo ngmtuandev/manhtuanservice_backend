@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import {
   AuthModule,
   BrandModule,
+  CartModule,
   DiscountModule,
   ProductModule,
   ServiceModule,
@@ -37,6 +38,7 @@ import { NewsModule } from './domain/news/news.module';
     VarientModule,
     CommentModule,
     NewsModule,
+    CartModule,
     ScheduleModule.forRoot(),
   ],
   controllers: [AppController],

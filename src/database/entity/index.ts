@@ -8,3 +8,5 @@ export * from './product-varient.entity';
 export * from './product.entity';
 export * from './comment.entity';
 export * from './news.entity';
+export * from './cart-item.entity';
+export * from './cart.entity';

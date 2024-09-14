@@ -14,8 +14,11 @@ export class ProductVarientEntity extends GenericEntity {
     @Column({ name: 'price' })
     price: number;
 
-    @Column({ name: 'storage' })
+    @Column({ name: 'storage', nullable: true })
     storage: number;
+
+    @Column({ name: 'quantity', default: 1 })
+    quantity: number;
 
     @Column({ name: 'color' })
     color: string;

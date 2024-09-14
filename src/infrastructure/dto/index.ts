@@ -46,4 +46,11 @@ export * from './news/create-news.dto';
 export * from './news/news.dto';
 export * from './news/find-news.dto';
 
+// CART
+export * from './cart/cart-item.dto';
+export * from './cart/create-cart-item.dto';
+export * from './cart/create-cart.dto';
+export * from './cart/find-cart.dto';
+export * from './cart/add-cart.dto';
+
 

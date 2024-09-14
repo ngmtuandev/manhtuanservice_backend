@@ -5,3 +5,5 @@ export * from './service.repository';
 export * from './brand.repository';
 export * from './discount.repository';
 export * from './news.repository';
+export * from './cart.repository';
+export * from './cart-item.repository';
