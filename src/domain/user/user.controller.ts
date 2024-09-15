@@ -6,6 +6,7 @@ import {
   Patch,
   Post,
   Put,
+  Query,
   Request,
 } from '@nestjs/common';
 import {
@@ -144,7 +145,7 @@ export class UserController {
 
   @PublicAuth()
   @Get('get-detail')
-  async getDetail(@Body() id: IdDto) {
+  async getDetail(@Query() id: IdDto) {
     try {
       const result = await this.userService.getDetail(id);
       return new Response(

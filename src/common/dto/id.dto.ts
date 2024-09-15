@@ -3,5 +3,5 @@ import { IsEmail, IsNotEmpty, IsNumber } from 'class-validator';
 export class IdDto {
   @IsNotEmpty()
   @IsNumber()
-  id: number;
+  id: number | string;
 }

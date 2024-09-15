@@ -64,7 +64,7 @@ export class UserService {
 
   async getDetail(id: IdDto) {
     let response = undefined;
-    const user = await this.usersRepository.findUserById(id.id);
+    const user = await this.usersRepository.findUserById(+id.id);
 
     if (user) response = XFunction.convertEntityTo(user, UserDto);
     return response;

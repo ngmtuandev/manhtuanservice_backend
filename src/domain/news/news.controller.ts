@@ -22,7 +22,6 @@ export class NewsController {
                 true,
             );
         } catch (error) {
-            console.log('error : ', error)
             return new Response(
                 STATUS_CODE.FAILURE,
                 null,

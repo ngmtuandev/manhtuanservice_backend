@@ -21,7 +21,7 @@ export class ServiceService {
     }
 
     async delete(id: IdDto) {
-        const result = await this.serviceRepository.delete(id.id);
+        const result = await this.serviceRepository.delete(+id.id);
         return result;
     }
 

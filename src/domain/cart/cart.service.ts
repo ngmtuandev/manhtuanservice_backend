@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { CartItemRepository, CartRepository } from 'src/database/repository';
-import { AddCartDto, FindCartDto } from 'src/infrastructure/dto';
+import { AddCartDto, DeleteItemDto, FindCartDto } from 'src/infrastructure/dto';
 import { DataSource, QueryRunner } from 'typeorm';
 
 @Injectable()
@@ -18,7 +18,11 @@ export class CartService {
         let findUserInCart = { userId: cartInfo.cart.user.id };
         const findCart = await this.cartRepository.findOne(findUserInCart);
         if (findCart) {
-            const cartItemNew = await this.cartItemRepository.create({ ...cartInfo.cartItem, cart: findCart });
+            const checkProductInCart = await this.cartItemRepository.checkProductInCart(findCart?.id, +cartInfo?.cartItem?.product)
+            if (!!checkProductInCart) {
+                return checkProductInCart;
+            }
+            await this.cartItemRepository.create({ ...cartInfo.cartItem, cart: findCart });
             // if (cartItemNew) {
             //     const updateCart = { ...findCart, id: findCart.id, total: findCart.total }
             //     await this.cartRepository.update(updateCart)
@@ -42,12 +46,17 @@ export class CartService {
             finally {
                 await queryRunner.release();
             }
-
         }
+        return result;
     }
 
     async findOne(findInfo: FindCartDto) {
         const result = await this.cartRepository.findOne(findInfo);
+        return result;
+    }
+
+    async delete(deleteInfo: DeleteItemDto) {
+        const result = await this.cartItemRepository.deleteItem(deleteInfo);
         return result;
     }
 

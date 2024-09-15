@@ -52,5 +52,6 @@ export * from './cart/create-cart-item.dto';
 export * from './cart/create-cart.dto';
 export * from './cart/find-cart.dto';
 export * from './cart/add-cart.dto';
+export * from './cart/delete-item.dto';
 
 
